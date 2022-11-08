@@ -3,7 +3,7 @@ import { CustomersService } from './customers.service';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { CreateCustomerDTO } from './dto/CreateCustomerDTO';
 import Customer from '../entity/Customer';
-import { ConflictException } from '@nestjs/common';
+import { ConflictException, NotFoundException } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { when } from 'jest-when';
 
@@ -13,6 +13,7 @@ describe('CustomersService', () => {
   const mockRepository = {
     create: jest.fn(),
     findByName: jest.fn(),
+    findById: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -49,6 +50,15 @@ describe('CustomersService', () => {
       .mockResolvedValue(Promise.resolve(new Customer()));
     await expect(service.create(input)).rejects.toBeInstanceOf(
       ConflictException,
+    );
+  });
+
+  it('should be throw not found exception when id not valid', async function () {
+    const id = 1;
+    const findById = jest.spyOn(mockRepository, 'findById');
+    when(findById).calledWith(id).mockResolvedValue(Promise.resolve(null));
+    await expect(service.getById(id.toString())).rejects.toBeInstanceOf(
+      NotFoundException,
     );
   });
 });
