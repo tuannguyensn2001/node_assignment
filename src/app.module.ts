@@ -14,6 +14,7 @@ import * as Joi from 'joi';
     }),
     MongooseModule.forRootAsync({
       useFactory(configService: ConfigService) {
+        console.log(configService.get('MONGO_URL'));
         return {
           uri: configService.get('MONGO_URL'),
         };

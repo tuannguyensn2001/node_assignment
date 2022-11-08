@@ -5,15 +5,13 @@ services:
       dockerfile: Dockerfile
       context: .
     env_file:
-      - .env
+      - .env.production
     ports:
       - "${PORT}:${PORT}"
     networks:
       - nest
   mongo:
     image: mongo
-    ports:
-      - "27017:27017"
     networks:
       - nest
     environment:
