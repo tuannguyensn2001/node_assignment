@@ -23,6 +23,7 @@ export class CustomersService implements CustomerServiceInterface {
 
   async create(input: CreateCustomerDTO): Promise<Customer> {
     const customer = await this.customerRepository.findByName(input.name);
+    this.logger.log(customer);
     if (Boolean(customer)) {
       throw new ConflictException('customer existed');
     }
