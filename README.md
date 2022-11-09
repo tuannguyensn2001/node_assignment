@@ -2,7 +2,7 @@
 
 ```bash
 # init .env
-$ cp .env.example .env.production
+$ cp .env.example .env
 
 # run install
 $ npm install

@@ -14,4 +14,5 @@ COPY package*.json ./
 RUN npm install --only=prod
 COPY . .
 COPY --from=builder /app/dist ./dist
+EXPOSE 6000
 CMD ["node","dist/main"]

@@ -1,13 +1,11 @@
-version: "3"
+version: "3.9"
 services:
   app:
     build:
       dockerfile: Dockerfile
       context: .
-    env_file:
-      - .env.production
     ports:
-      - "${PORT}:${PORT}"
+      - "${PORT}:6000"
     networks:
       - nest
   mongo:

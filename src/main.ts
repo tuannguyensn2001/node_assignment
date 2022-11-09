@@ -12,8 +12,7 @@ async function bootstrap() {
   });
   app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
   app.useGlobalPipes(new ValidationPipe());
-  const port = app.get(ConfigService).get('PORT');
-  await app.listen(port);
+  await app.listen(6000);
 }
 
 void bootstrap();

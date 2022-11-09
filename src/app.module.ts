@@ -24,7 +24,7 @@ import * as Joi from 'joi';
     }),
     ConfigModule.forRoot({
       validationSchema: Joi.object({
-        PORT: Joi.number().default(3000),
+        PORT: Joi.string().default('6000'),
         MONGO_URL: Joi.string().required(),
       }),
     }),
